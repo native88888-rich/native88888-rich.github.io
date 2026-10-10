@@ -1301,3 +1301,12 @@ figure[data-fx="wind"] .fx i:nth-child(5){top:30%;left:0;animation-delay:1.8s}
 @media (prefers-reduced-motion:reduce){
   .fx,.fx i,.fx::after{animation:none!important;opacity:0!important}
 }
+
+
+@media (max-width:760px){
+  .hero__disc{width:calc(100% - 48px)}
+  .hero__art img{max-width:calc(100% - 48px)}
+}
+@media (max-width:480px){
+  .thesis__quote{font-size:clamp(1.15rem,5.6vw,1.55rem)}
+}
