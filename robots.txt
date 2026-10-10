@@ -1,0 +1,5 @@
+# NATIVE 那特兔官網
+User-agent: *
+Allow: /
+
+Sitemap: https://native88888-rich.github.io/sitemap.xml
