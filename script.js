@@ -355,6 +355,7 @@
     var on = q ? q === '1' : ((m === 10 && d >= 24) || (m === 11 && d === 1 && h < 4));
     if (!on) return;
     document.documentElement.classList.add('is-halloween');
+    var tc = document.querySelector('meta[name=theme-color]'); if (tc) tc.setAttribute('content', '#17121D');
     var track = document.querySelector('.ticker__track');
     if (track) {
       var words = ['萬聖節試裝中', '怎麼扮，耳朵都會跑出來', '不給糖，我就回床上'];

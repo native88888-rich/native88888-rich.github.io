@@ -1353,3 +1353,46 @@ figure[data-fx="wind"] .fx i:nth-child(5){top:30%;left:0;animation-delay:1.8s}
   .hw-bat--3,.hw-bat--4{display:none}
 }
 @media (prefers-reduced-motion:reduce){.hw-bat,.hw-bat svg,.is-halloween .hw-card{animation:none}.hw-bat{display:none}}
+
+
+html.is-halloween{
+  --cream:#17121D;--paper:#201927;--sand:#2A2132;--line:#3B3045;--gray:#A99D93;
+  --ink:#F3E7D3;--ink-soft:#CBBBA6;--ink-mute:#8F8274;
+  --accent:#FF7A1A;--accent-deep:#FF9A45;--accent-soft:rgba(255,122,26,.14);
+  color-scheme:dark;
+}
+.is-halloween body{
+  background:
+    radial-gradient(1200px 700px at 78% 8%,rgba(255,122,26,.10),transparent 60%),
+    radial-gradient(900px 600px at 10% 40%,rgba(120,70,160,.16),transparent 65%),
+    var(--cream);
+  background-attachment:fixed;
+}
+.is-halloween body::before{mix-blend-mode:screen;opacity:.035}
+
+.is-halloween :is(.ticker,.status,.quotes,.dreams,.buyband,.skip,.mdetail__plate--dark){
+  --ink:#0B080E;--cream:#F3E7D3;--gray:#A99D93;background:#0B080E;color:#F3E7D3;
+}
+.is-halloween .quotes__grid p:hover{background:#1C1424}
+
+.is-halloween :is(.btn--primary,.nav__mark,.foot__mark,.merch__badge,.sched li.now,.cust__side button.is-on,.nav__cta){
+  background:var(--accent)!important;color:#17121D!important;border-color:var(--accent)!important;
+}
+.is-halloween .nav{background:rgba(23,18,29,.82)}
+.is-halloween .nav__burger span{background:var(--ink)}
+.is-halloween :is(.social,.social--main){background:var(--paper)}
+.is-halloween .social:hover{background:var(--sand)}
+
+.is-halloween :is(.skill--flat,.tcard--solid,.tcard--liquid,.tcard){background:var(--paper)!important;border-color:var(--line)!important}
+.is-halloween .rail ol{background:rgba(23,18,29,.78)}
+
+.is-halloween img{outline-color:transparent}
+
+.is-halloween .hero__disc{box-shadow:inset 0 0 46px rgba(120,98,60,.10),0 0 90px 10px rgba(255,190,110,.22),0 0 220px 60px rgba(255,122,26,.12)}
+.is-halloween .hero__disc::after{border-color:rgba(255,154,69,.45)}
+.is-halloween .hero__title em{text-shadow:0 0 28px rgba(255,122,26,.55)}
+.is-halloween .eyebrow{color:var(--accent)}
+.is-halloween .hw-web{color:#F3E7D3;opacity:.28}
+.is-halloween .hw-bat{color:#0B080E;opacity:.95}
+.is-halloween .hw-bat--5{color:var(--accent)}
+.is-halloween .hw-card{background:#0B080E;box-shadow:0 0 0 1px rgba(255,122,26,.35),0 18px 40px -16px rgba(0,0,0,.7)}
