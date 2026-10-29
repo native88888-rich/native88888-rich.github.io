@@ -347,4 +347,32 @@
     });
     document.addEventListener('click', function () { setTag(false); });
   }
+  
+  (function () {
+    var q = (location.search.match(/[?&]halloween=([01])/) || [])[1];
+    var tw = new Date(Date.now() + 8 * 3600e3);
+    var m = tw.getUTCMonth() + 1, d = tw.getUTCDate(), h = tw.getUTCHours();
+    var on = q ? q === '1' : ((m === 10 && d >= 24) || (m === 11 && d === 1 && h < 4));
+    if (!on) return;
+    document.documentElement.classList.add('is-halloween');
+    var track = document.querySelector('.ticker__track');
+    if (track) {
+      var words = ['萬聖節試裝中', '怎麼扮，耳朵都會跑出來', '不給糖，我就回床上'];
+      var spans = track.querySelectorAll('span'), half = spans.length / 2;
+      [0, half].forEach(function (i) {
+        var ref = spans[i];
+        words.forEach(function (w) {
+          var el = document.createElement('span');
+          el.className = 'hw-tick'; el.textContent = w;
+          track.insertBefore(el, ref);
+        });
+      });
+    }
+    var card = document.getElementById('hwCard'), x = document.getElementById('hwClose');
+    try { if (sessionStorage.getItem('hwClosed')) card.classList.add('is-closed'); } catch (e) {}
+    if (x) x.addEventListener('click', function () {
+      card.classList.add('is-closed');
+      try { sessionStorage.setItem('hwClosed', '1'); } catch (e) {}
+    });
+  })();
 })();
