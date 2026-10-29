@@ -356,6 +356,10 @@
     if (!on) return;
     document.documentElement.classList.add('is-halloween');
     var tc = document.querySelector('meta[name=theme-color]'); if (tc) tc.setAttribute('content', '#17121D');
+    Array.prototype.forEach.call(document.querySelectorAll('img[data-hw-src]'), function (img) {
+      img.src = img.getAttribute('data-hw-src');
+      if (img.getAttribute('data-hw-alt')) img.alt = img.getAttribute('data-hw-alt');
+    });
     var track = document.querySelector('.ticker__track');
     if (track) {
       var words = ['萬聖節試裝中', '怎麼扮，耳朵都會跑出來', '不給糖，我就回床上'];

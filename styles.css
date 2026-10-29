@@ -1396,3 +1396,15 @@ html.is-halloween{
 .is-halloween .hw-bat{color:#0B080E;opacity:.95}
 .is-halloween .hw-bat--5{color:var(--accent)}
 .is-halloween .hw-card{background:#0B080E;box-shadow:0 0 0 1px rgba(255,122,26,.35),0 18px 40px -16px rgba(0,0,0,.7)}
+
+.is-halloween .hero__art img{mix-blend-mode:normal;border-radius:50%;aspect-ratio:1;object-fit:cover;width:min(100%,560px);
+  box-shadow:0 0 0 6px rgba(255,190,110,.18),0 0 60px rgba(255,122,26,.25)}
+.is-halloween .hero__tag{display:none}
+.hw-ante{display:none}
+.is-halloween .hw-ante{display:block;max-width:var(--wrap);margin:clamp(32px,5vw,56px) auto 0;padding:0 var(--pad)}
+.hw-ante__k{font-family:var(--font-mono);font-size:11px;letter-spacing:.16em;color:var(--accent);margin-bottom:1rem}
+.hw-ante__row{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,2vw,24px)}
+.hw-ante figure img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:var(--radius)}
+.hw-ante figcaption{margin-top:.6rem;font-size:14px;font-weight:500;color:var(--ink)}
+.hw-ante figcaption span{font-weight:300;color:var(--ink-mute);font-size:13px}
+@media (max-width:640px){.hw-ante__row{grid-template-columns:1fr}}
