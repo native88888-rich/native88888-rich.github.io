@@ -1395,7 +1395,7 @@ html.is-halloween{
 .is-halloween .hw-web{color:#F3E7D3;opacity:.28}
 .is-halloween .hw-bat{color:#0B080E;opacity:.95}
 .is-halloween .hw-bat--5{color:var(--accent)}
-.is-halloween .hw-card{background:#0B080E;box-shadow:0 0 0 1px rgba(255,122,26,.35),0 18px 40px -16px rgba(0,0,0,.7)}
+.is-halloween .hw-card{background:#0B080E;color:#F3E7D3;box-shadow:0 0 0 1px rgba(255,122,26,.35),0 18px 40px -16px rgba(0,0,0,.7)}
 
 .is-halloween .hero__art img{mix-blend-mode:normal;border-radius:50%;aspect-ratio:1;object-fit:cover;width:min(100%,560px);
   box-shadow:0 0 0 6px rgba(255,190,110,.18),0 0 60px rgba(255,122,26,.25)}
