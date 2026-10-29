@@ -356,6 +356,11 @@
     if (!on) return;
     document.documentElement.classList.add('is-halloween');
     var tc = document.querySelector('meta[name=theme-color]'); if (tc) tc.setAttribute('content', '#17121D');
+    var HW_MAP = { 'hero_plain.webp': 'halloween_hero.webp', 'ante_hero.webp': 'halloween_ante_pumpkin.webp', 'ante_pair.webp': 'halloween_ante_pair.webp' };
+    Array.prototype.forEach.call(document.querySelectorAll('img'), function (img) {
+      var f = (img.getAttribute('src') || '').split('/').pop();
+      if (HW_MAP[f] && !img.hasAttribute('data-hw-src')) img.setAttribute('data-hw-src', 'assets/' + HW_MAP[f]);
+    });
     Array.prototype.forEach.call(document.querySelectorAll('img[data-hw-src]'), function (img) {
       img.src = img.getAttribute('data-hw-src');
       if (img.getAttribute('data-hw-alt')) img.alt = img.getAttribute('data-hw-alt');
