@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>官網訪客</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f0e4; --card:#fffcf6; --hero:#efe5d3; --ink:#1d1d1b; --ink2:#5a554d; --muted:#938c80;
+  --line:#e6dccb; --track:#f1e8da; --accent:#d9692f; --accent-ink:#b4531f; --accent-soft:#fbe3d3;
+  --up:#3f7a52; --down:#b4531f; --shadow:0 1px 2px rgba(80,60,30,.05),0 8px 24px rgba(80,60,30,.06);
+  --serif:"Noto Serif TC","Songti TC",serif; --sans:"Noto Sans TC",-apple-system,"Helvetica Neue",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1a1714; --card:#24201b; --hero:#2c2620; --ink:#f3ece0; --ink2:#cfc6b6; --muted:#9d9588;
+  --line:#3a332b; --track:#322b24; --accent:#d8743f; --accent-ink:#f0a476; --accent-soft:#4a3020;
+  --up:#8cc79d; --down:#f0a476; --shadow:none;
+}}
+:root[data-theme="dark"]{
+  --bg:#1a1714; --card:#24201b; --hero:#2c2620; --ink:#f3ece0; --ink2:#cfc6b6; --muted:#9d9588;
+  --line:#3a332b; --track:#322b24; --accent:#d8743f; --accent-ink:#f0a476; --accent-soft:#4a3020;
+  --up:#8cc79d; --down:#f0a476; --shadow:none;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+.wrap{max-width:960px;margin:0 auto;padding:24px 16px 56px}
+
+/* 頂部 */
+.top{position:relative;background:var(--hero);border-radius:28px;padding:28px 30px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;overflow:hidden;margin-bottom:18px}
+.eyebrow{font-size:12px;letter-spacing:.18em;color:var(--accent-ink);font-weight:700}
+h1{font-family:var(--serif);font-weight:900;font-size:40px;line-height:1.15;margin:8px 0 6px}
+.period{color:var(--ink2);font-size:14px}
+.top img{width:150px;height:150px;object-fit:cover;border-radius:50%;border:6px solid var(--card);box-shadow:var(--shadow)}
+.tabs{display:inline-flex;gap:4px;background:var(--card);padding:5px;border-radius:999px;margin-top:18px;box-shadow:var(--shadow)}
+.tabs button{border:0;background:transparent;color:var(--ink2);font:500 14px var(--sans);padding:8px 18px;border-radius:999px;cursor:pointer;transition:background .15s,color .15s}
+.tabs button:hover{color:var(--ink)}
+.tabs button[aria-pressed="true"]{background:var(--ink);color:var(--card)}
+
+/* 卡片 */
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px 24px;box-shadow:var(--shadow)}
+.stack{display:flex;flex-direction:column;gap:16px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.tiles{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:16px}
+h2{font-size:15px;font-weight:700;margin:0 0 16px;display:flex;align-items:baseline;gap:8px}
+h2 small{font-weight:400;color:var(--muted);font-size:12px}
+
+.tile .k{color:var(--muted);font-size:13px}
+.tile .v{font-family:var(--serif);font-weight:900;font-size:52px;line-height:1.05;margin-top:8px;font-variant-numeric:tabular-nums}
+.tile .v.mid{font-size:30px;margin-top:14px}
+.tile .s{color:var(--ink2);font-size:13px;margin-top:8px}
+.delta{display:inline-flex;align-items:center;gap:4px;font-weight:700}
+.delta.up{color:var(--up)} .delta.down{color:var(--down)} .delta.flat{color:var(--muted)}
+
+/* 圖表 */
+.chart{position:relative}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.axis{fill:var(--muted);font-size:11px;font-family:var(--sans)}
+.gl{stroke:var(--line);stroke-width:1}
+.gl.base{stroke:var(--ink2);stroke-opacity:.35}
+.bar{fill:var(--accent);transition:opacity .1s}
+.chart.hovering .bar{opacity:.45}
+.chart.hovering .bar.on{opacity:1}
+.hit{fill:transparent;cursor:pointer}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--card);font-size:12px;padding:7px 11px;border-radius:10px;white-space:nowrap;transform:translate(-50%,calc(-100% - 8px));opacity:0;transition:opacity .1s;z-index:2}
+.tip b{font-size:15px;font-family:var(--serif)}
+
+/* 排行 */
+.rows{display:flex;flex-direction:column;gap:12px}
+.row{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:6px 12px;align-items:center;font-size:14px}
+.badge{width:30px;height:30px;border-radius:50%;background:var(--accent-soft);color:var(--accent-ink);display:grid;place-items:center;font-weight:700;font-size:13px;grid-row:span 2}
+.row .name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .val{color:var(--ink);font-weight:700;font-variant-numeric:tabular-nums}
+.row .val small{color:var(--muted);font-weight:400;margin-left:6px}
+.row .track{grid-column:2/-1;height:6px;background:var(--track);border-radius:3px;overflow:hidden}
+.row .fill{height:100%;background:var(--accent);border-radius:3px}
+.rows.plain .row{grid-template-columns:minmax(0,1fr) auto}
+.rows.plain .track{grid-column:1/-1}
+
+.empty{display:flex;align-items:center;gap:14px;color:var(--muted);font-size:14px}
+.empty img{width:64px;height:64px;border-radius:50%;object-fit:cover;opacity:.9}
+
+.notes{font-size:13px;color:var(--ink2);line-height:1.8;margin:0;padding-left:18px}
+.notes li::marker{color:var(--accent)}
+footer{color:var(--muted);font-size:12px;margin-top:22px;line-height:1.8;text-align:center}
+footer a{color:var(--ink2)}
+
+@media (max-width:760px){
+  .tiles{grid-template-columns:1fr 1fr}.tiles .tile:first-child{grid-column:1/-1}
+}
+@media (max-width:640px){
+  .top{grid-template-columns:1fr;padding:22px 20px;border-radius:24px}
+  .top img{position:absolute;right:-18px;top:-10px;width:120px;height:120px;opacity:.95}
+  h1{font-size:32px;padding-right:90px}
+  .grid{grid-template-columns:1fr}
+  .tile .v{font-size:44px}
+  .card{padding:20px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="top">
+    <div>
+      <div class="eyebrow">NATIVE 那特兔 ・ 官網</div>
+      <h1>誰來看過官網</h1>
+      <div class="period" id="period"></div>
+      <div class="tabs" role="group" aria-label="期間">
+        <button data-r="1">今天</button><button data-r="7" aria-pressed="true">7 天</button><button data-r="30">30 天</button>
+      </div>
+    </div>
+    <img src="/assets/hero_plain.webp" alt="那特兔">
+  </section>
+
+  <div class="stack">
+    <div class="tiles">
+      <section class="card tile"><div class="k">看過官網</div><div class="v" id="total">–</div><div class="s">人次</div></section>
+      <section class="card tile"><div class="k" id="prevK">比上一段</div><div class="v mid" id="delta">–</div><div class="s" id="prevS"></div></section>
+      <section class="card tile"><div class="k">最多從哪來</div><div class="v mid" id="topRef">–</div><div class="s" id="topRefS"></div></section>
+    </div>
+
+    <section class="card" id="dailyCard"><h2>每天幾人次</h2><div class="chart" id="daily"></div></section>
+    <section class="card"><h2>幾點最多人來<small>台灣時間</small></h2><div class="chart" id="hourly"></div></section>
+
+    <section class="card"><h2>從哪裡來<small>點了哪個平台的連結進來</small></h2><div class="rows" id="refs"></div></section>
+
+    <div class="grid">
+      <section class="card"><h2>看了哪一頁</h2><div class="rows plain" id="pages"></div></section>
+      <section class="card"><h2>用什麼看</h2><div class="rows plain" id="sizes"></div></section>
+    </div>
+    <div class="grid">
+      <section class="card"><h2>在哪個城市<small>台灣</small></h2><div class="rows plain" id="cities"></div></section>
+      <section class="card"><h2>國家</h2><div class="rows plain" id="locs"></div></section>
+    </div>
+    <div class="grid">
+      <section class="card"><h2>瀏覽器語言<small>10/31 起才開始收</small></h2><div class="rows plain" id="langs"></div></section>
+      <section class="card"><h2>怎麼看這頁</h2>
+        <ul class="notes">
+          <li>「人次」：同一個人隔天再來會再算一次。</li>
+          <li>「直接輸入／書籤」：自己打網址、用書籤，或從不告訴我們來源的 App 點進來。</li>
+          <li>只看得到「從哪來、在哪、用什麼看」，看不到是誰。</li>
+          <li>10/31 晚上那 2 筆是安裝測試，不是真的訪客。</li>
+        </ul></section>
+    </div>
+  </div>
+
+  <footer>每小時自動更新｜最後更新 <span id="built"></span><br>原始數據：<a href="https://native-bun.goatcounter.com" target="_blank" rel="noopener">GoatCounter</a></footer>
+</div>
+
+<script>
+const DATA = {"built":"2026/10/31 21:56:05","ranges":{"1":{"start":"2026-10-31","end":"2026-10-31","total":2,"prev":0,"hourly":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0],"daily":[{"day":"2026-10-31","n":2}],"refs":[{"name":"test","count":1},{"name":"IG","count":1}],"pages":[{"name":"NATIVE 那特兔 — 拒絕營業中","path":"/","count":2}],"sizes":[{"name":"手機","count":1},{"name":"電腦","count":1},{"name":"平板","count":0},{"name":"不明","count":0}],"locs":[{"name":"台灣","count":2}],"cities":[{"name":"不明","count":2}],"langs":[{"name":"不明","count":2}]},"7":{"start":"2026-10-25","end":"2026-10-31","total":2,"prev":0,"hourly":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0],"daily":[{"day":"2026-10-25","n":0},{"day":"2026-10-26","n":0},{"day":"2026-10-27","n":0},{"day":"2026-10-28","n":0},{"day":"2026-10-29","n":0},{"day":"2026-10-30","n":0},{"day":"2026-10-31","n":2}],"refs":[{"name":"test","count":1},{"name":"IG","count":1}],"pages":[{"name":"NATIVE 那特兔 — 拒絕營業中","path":"/","count":2}],"sizes":[{"name":"手機","count":1},{"name":"電腦","count":1},{"name":"平板","count":0},{"name":"不明","count":0}],"locs":[{"name":"台灣","count":2}],"cities":[{"name":"不明","count":2}],"langs":[{"name":"不明","count":2}]},"30":{"start":"2026-10-02","end":"2026-10-31","total":2,"prev":0,"hourly":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0],"daily":[{"day":"2026-10-02","n":0},{"day":"2026-10-03","n":0},{"day":"2026-10-04","n":0},{"day":"2026-10-05","n":0},{"day":"2026-10-06","n":0},{"day":"2026-10-07","n":0},{"day":"2026-10-08","n":0},{"day":"2026-10-09","n":0},{"day":"2026-10-10","n":0},{"day":"2026-10-11","n":0},{"day":"2026-10-12","n":0},{"day":"2026-10-13","n":0},{"day":"2026-10-14","n":0},{"day":"2026-10-15","n":0},{"day":"2026-10-16","n":0},{"day":"2026-10-17","n":0},{"day":"2026-10-18","n":0},{"day":"2026-10-19","n":0},{"day":"2026-10-20","n":0},{"day":"2026-10-21","n":0},{"day":"2026-10-22","n":0},{"day":"2026-10-23","n":0},{"day":"2026-10-24","n":0},{"day":"2026-10-25","n":0},{"day":"2026-10-26","n":0},{"day":"2026-10-27","n":0},{"day":"2026-10-28","n":0},{"day":"2026-10-29","n":0},{"day":"2026-10-30","n":0},{"day":"2026-10-31","n":2}],"refs":[{"name":"test","count":1},{"name":"IG","count":1}],"pages":[{"name":"NATIVE 那特兔 — 拒絕營業中","path":"/","count":2}],"sizes":[{"name":"手機","count":1},{"name":"電腦","count":1},{"name":"平板","count":0},{"name":"不明","count":0}],"locs":[{"name":"台灣","count":2}],"cities":[{"name":"不明","count":2}],"langs":[{"name":"不明","count":2}]}}};
+const $ = (id) => document.getElementById(id);
+const fmtDay = (s) => { const [, m, d] = s.split("-"); return `${+m}/${+d}`; };
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const EMPTY = '<div class="empty"><img src="/assets/state_sleeping.webp" alt="">還沒有人來。</div>';
+const BADGE = { "IG": "IG", "脆": "脆", "FB": "FB", "YouTube": "YT", "Google 搜尋": "G", "LINE": "L", "直接輸入／書籤": "直" };
+
+function rows(el, list, total, badges) {
+  list = list.filter((r) => r.count > 0);
+  if (!list.length) { el.innerHTML = EMPTY; return; }
+  const max = Math.max(...list.map((r) => r.count));
+  el.innerHTML = list.slice(0, 8).map((r, i) => {
+    const pct = total ? Math.round((r.count / total) * 100) : 0;
+    const b = badges ? `<span class="badge">${esc(BADGE[r.name] ?? r.name.slice(0, 1))}</span>` : "";
+    return `<div class="row" title="${esc(r.name)}：${r.count} 人次">${b}
+      <span class="name">${esc(r.name)}</span><span class="val">${r.count}<small>${pct}%</small></span>
+      <div class="track"><div class="fill" style="width:${Math.max(2, (r.count / max) * 100)}%"></div></div></div>`;
+  }).join("");
+}
+
+function bars(el, items, labelOf, tipOf, everyMin) {
+  const W = Math.max(300, Math.round(el.clientWidth || 800)), H = W < 500 ? 170 : 210, L = 28, B = 26, T = 12;
+  const max = Math.max(1, ...items.map((d) => d.n));
+  const step = Math.max(1, Math.ceil(max / 4)), top = step * Math.ceil(max / step);
+  const n = items.length, slot = (W - L) / n, bw = Math.max(3, Math.min(26, slot - 2));
+  const y = (v) => T + (H - T - B) * (1 - v / top);
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img">`;
+  for (let v = 0; v <= top; v += step) s += `<line class="gl${v ? "" : " base"}" x1="${L}" x2="${W}" y1="${y(v)}" y2="${y(v)}"/><text class="axis" x="${L - 8}" y="${y(v) + 4}" text-anchor="end">${v}</text>`;
+  const every = Math.max(1, Math.ceil(n / Math.floor(W / everyMin)));
+  items.forEach((d, i) => {
+    const cx = L + slot * i + slot / 2, h = y(0) - y(d.n), r = Math.min(4, bw / 2, h);
+    const x0 = cx - bw / 2, y0 = y(d.n), yb = y(0);
+    s += `<rect class="hit" data-i="${i}" x="${L + slot * i}" y="${T}" width="${slot}" height="${H - T - B}"/>`;
+    if (h > 0) s += `<path class="bar" data-i="${i}" d="M${x0},${yb} V${y0 + r} Q${x0},${y0} ${x0 + r},${y0} H${x0 + bw - r} Q${x0 + bw},${y0} ${x0 + bw},${y0 + r} V${yb} Z"/>`;
+    if (i % every === 0) s += `<text class="axis" x="${cx}" y="${H - 6}" text-anchor="middle">${labelOf(d, i)}</text>`;
+  });
+  el.innerHTML = s + `</svg><div class="tip"></div>`;
+  const tip = el.querySelector(".tip"), svg = el.querySelector("svg");
+  const show = (i) => {
+    const d = items[i], k = svg.getBoundingClientRect().width / W;
+    tip.innerHTML = tipOf(d, i);
+    tip.style.left = `${Math.min(Math.max((L + slot * i + slot / 2) * k, 60), el.clientWidth - 60)}px`;
+    tip.style.top = `${y(d.n) * k}px`; tip.style.opacity = 1;
+    el.classList.add("hovering");
+    el.querySelectorAll(".bar").forEach((b) => b.classList.toggle("on", +b.dataset.i === i));
+  };
+  el.querySelectorAll(".hit").forEach((h) => { h.addEventListener("mouseenter", () => show(+h.dataset.i)); h.addEventListener("click", () => show(+h.dataset.i)); });
+  svg.addEventListener("mouseleave", () => { tip.style.opacity = 0; el.classList.remove("hovering"); });
+}
+
+let cur = "7";
+function render(key) {
+  cur = key; const r = DATA.ranges[key];
+  document.querySelectorAll(".tabs button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.r === key));
+  try { localStorage.setItem("siteStatsRange", key); } catch (e) {}
+  $("period").textContent = key === "1" ? `今天 ${fmtDay(r.end)}` : `${fmtDay(r.start)} – ${fmtDay(r.end)}`;
+  $("total").textContent = r.total.toLocaleString();
+
+  const label = { "1": "比昨天", "7": "比前 7 天", "30": "比前 30 天" }[key];
+  $("prevK").textContent = label;
+  const d = r.total - r.prev;
+  $("delta").innerHTML = r.prev === 0 && r.total === 0 ? '<span class="delta flat">—</span>'
+    : r.prev === 0 ? '<span class="delta up">▲ 新的</span>'
+    : `<span class="delta ${d > 0 ? "up" : d < 0 ? "down" : "flat"}">${d > 0 ? "▲" : d < 0 ? "▼" : "＝"} ${Math.abs(Math.round((d / r.prev) * 100))}%</span>`;
+  $("prevS").textContent = `上一段 ${r.prev} 人次`;
+
+  const top = r.refs.find((x) => x.count > 0);
+  $("topRef").textContent = top ? top.name : "—";
+  $("topRefS").textContent = top ? `${top.count} 人次・${Math.round((top.count / r.total) * 100)}%` : "還沒有資料";
+
+  $("dailyCard").style.display = key === "1" ? "none" : "";
+  if (key !== "1") bars($("daily"), r.daily, (d) => fmtDay(d.day), (d) => `${fmtDay(d.day)}　<b>${d.n}</b> 人次`, 56);
+  bars($("hourly"), r.hourly.map((n) => ({ n })), (_, i) => `${i}`, (d, i) => `${i}:00–${i + 1}:00　<b>${d.n}</b> 人次`, 34);
+
+  rows($("refs"), r.refs, r.total, true);
+  rows($("pages"), r.pages.map((p) => ({ name: p.path === "/" ? "首頁" : p.path === "/links.html" ? "IG 簡介連結頁" : p.name, count: p.count })), r.total);
+  rows($("sizes"), r.sizes, r.total);
+  rows($("cities"), r.cities.filter((c) => c.name !== "不明"), r.total);
+  rows($("locs"), r.locs, r.total);
+  rows($("langs"), r.langs, r.total);
+}
+
+$("built").textContent = DATA.built;
+document.querySelectorAll(".tabs button").forEach((b) => b.addEventListener("click", () => render(b.dataset.r)));
+let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => render(cur), 150); });
+let start = "7"; try { start = localStorage.getItem("siteStatsRange") || "7"; } catch (e) {}
+render(DATA.ranges[start] ? start : "7");
+</script>
+</body>
+</html>
