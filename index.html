@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@300;500;700&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23FBF6EF'/%3E%3Ctext x='50' y='72' font-family='Space Grotesk,sans-serif' font-size='68' font-weight='700' text-anchor='middle' fill='%231D1D1B'%3EN%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="styles.css?v=20261029e">
+<link rel="stylesheet" href="styles.css?v=20261029f">
 </head>
 <body>
 <a class="skip" href="#main">跳到主要內容</a>
@@ -39,6 +39,7 @@
     <span class="nav__name">NATIVE<em>那特兔</em></span>
   </a>
   <nav class="nav__links" aria-label="主導覽">
+    <a href="#reels">影片</a>
     <a href="#about">身世</a>
     <a href="#schedule">作息</a>
     <a href="#states">情緒型錄</a>
@@ -79,6 +80,49 @@
     </div>
   </div>
   <div class="hero__scroll"><span>往下爬（如果你爬得動）</span></div>
+</section>
+
+<section class="reels" id="reels" aria-labelledby="reelsTitle">
+  <div class="section__head">
+    <span class="section__idx">NEW</span>
+    <h2 class="section__title" id="reelsTitle">最新影片 <em>Reels</em></h2>
+  </div>
+  <div class="reels__who">
+    <p><b>那特兔</b>我的靈魂想統治世界，我的身體只想統治這張床。</p>
+    <p><b>安特龜</b>撐不住的時候，保住形狀。</p>
+  </div>
+  <div class="reels__row">
+    <article class="reel">
+      <a class="reel__link" href="https://www.instagram.com/native_bun/" target="_blank" rel="noopener" aria-label="安特龜〈天塌下來，先擦指甲。〉在 Instagram 看">
+        <video class="reel__v" src="assets/video/reel_ante_nails.mp4" poster="assets/reel_ante_nails_poster.webp" muted loop playsinline preload="none" width="720" height="1280" aria-hidden="true"></video>
+        <span class="reel__cap"><span class="reel__who">安特龜</span>天塌下來，先擦指甲。</span>
+      </a>
+    </article>
+    <article class="reel">
+      <a class="reel__link" href="https://www.instagram.com/native_bun/" target="_blank" rel="noopener" aria-label="那特兔〈颱風假的一天〉在 Instagram 看">
+        <video class="reel__v" src="assets/video/reel_typhoon_day.mp4" poster="assets/reel_typhoon_day_poster.webp" muted loop playsinline preload="none" width="720" height="1280" aria-hidden="true"></video>
+        <span class="reel__cap"><span class="reel__who">那特兔</span>颱風假的一天</span>
+      </a>
+      <a class="reel__yt" href="https://youtube.com/shorts/vhsDcId8Ma8" target="_blank" rel="noopener">YouTube</a>
+    </article>
+    <article class="reel">
+      <a class="reel__link" href="https://www.instagram.com/native_bun/" target="_blank" rel="noopener" aria-label="那特兔〈不給糖就搗蛋。〉在 Instagram 看">
+        <video class="reel__v" src="assets/video/reel_halloween.mp4" poster="assets/reel_halloween_poster.webp" muted loop playsinline preload="none" width="720" height="1280" aria-hidden="true"></video>
+        <span class="reel__cap"><span class="reel__who">那特兔</span>不給糖就搗蛋。</span>
+      </a>
+    </article>
+    <article class="reel">
+      <a class="reel__link" href="https://www.instagram.com/native_bun/" target="_blank" rel="noopener" aria-label="那特兔〈閃身步〉在 Instagram 看">
+        <video class="reel__v" src="assets/video/reel_national_day.mp4" poster="assets/reel_national_day_poster.webp" muted loop playsinline preload="none" width="720" height="1280" aria-hidden="true"></video>
+        <span class="reel__cap"><span class="reel__who">那特兔</span>閃身步。</span>
+      </a>
+    </article>
+  </div>
+  <div class="reels__cta">
+    <a class="btn btn--primary btn--ig" href="https://www.instagram.com/native_bun/" target="_blank" rel="noopener">追蹤 IG @native_bun
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a class="btn btn--ghost" href="https://www.youtube.com/channel/UCAhAvVPeSUpi4-5xOSkR2rQ" target="_blank" rel="noopener">YouTube 頻道</a>
+  </div>
 </section>
 
 <section class="status" aria-label="那特兔此刻狀態">
@@ -555,6 +599,7 @@
 
 <nav class="rail" id="rail" aria-label="區塊快速跳轉">
   <ol>
+    <li><a href="#reels" data-l="影片"><span></span><em>影片</em></a></li>
     <li><a href="#about" data-l="身世"><span></span><em>身世</em></a></li>
     <li><a href="#schedule" data-l="作息"><span></span><em>作息</em></a></li>
     <li><a href="#states" data-l="情緒型錄"><span></span><em>情緒型錄</em></a></li>
@@ -780,5 +825,7 @@
 </aside>
 
 <script src="script.js?v=20261029e"></script>
+<script src="reels.js?v=20261029a"></script>
+<script data-goatcounter="https://native-bun.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
